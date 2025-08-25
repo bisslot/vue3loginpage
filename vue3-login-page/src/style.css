@@ -1,0 +1,295 @@
+/* 全局样式重置和基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow-x: hidden;
+  transition: background 0.5s ease;
+}
+
+/* 页面加载动画 */
+body {
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+body.page-loaded {
+  opacity: 1;
+}
+
+/* 输入框聚焦时背景微妙变化 */
+body.input-focused {
+  background-image: linear-gradient(135deg, #5a6fd9 0%, #6a42a0 100%);
+}
+
+#app {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 响应式容器 */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 40px 32px;
+  animation: slideUp 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--td-brand-color) 0%, var(--td-success-color) 100%);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 添加页面元素进入动画 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  #app {
+    padding: 16px;
+  }
+  
+  .login-container {
+    max-width: 100%;
+    padding: 32px 24px;
+    border-radius: 12px;
+  }
+  
+  /* 减小动画幅度，提高性能 */
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* 减少背景动画强度，提高性能 */
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 24px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 调整页面元素间距 */
+  .login-header {
+    margin-bottom: 24px;
+  }
+  
+  .login-logo {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 12px;
+  }
+  
+  .login-title {
+    font-size: 20px;
+  }
+  
+  .form-item {
+    margin-bottom: 16px;
+  }
+  
+  /* 优化触摸区域大小 */
+  .t-input {
+    height: 48px !important;
+  }
+  
+  .login-button {
+    height: 48px !important;
+  }
+  
+  /* 增加页脚间距 */
+  .login-footer {
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+}
+
+/* 小屏幕手机适配 */
+@media (max-width: 360px) {
+  .login-container {
+    padding: 20px 16px;
+  }
+  
+  .login-logo {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .login-title {
+    font-size: 18px;
+  }
+  
+  .login-subtitle {
+    font-size: 13px;
+  }
+}
+
+/* 登录头部样式 */
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-logo {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  background: var(--td-brand-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.login-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--td-text-color-primary);
+  margin-bottom: 8px;
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: var(--td-text-color-secondary);
+}
+
+/* 表单样式 */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-item label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--td-text-color-primary);
+}
+
+/* 自定义TDesign组件样式 */
+.t-input {
+  height: 44px !important;
+}
+
+.t-button {
+  height: 44px !important;
+  font-weight: 500 !important;
+}
+
+/* 验证码区域 */
+.captcha-container {
+  margin: 20px 0;
+}
+
+/* 登录按钮 */
+.login-button {
+  margin-top: 8px;
+}
+
+/* 页脚链接 */
+.login-footer {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--td-border-level-1-color);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 14px;
+}
+
+.footer-links a {
+  color: var(--td-text-color-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--td-brand-color);
+}
